@@ -25,14 +25,14 @@ def test_my_first():
             el_menu = wait.until(ec.presence_of_element_located((By.XPATH, '//*[@id="box-apps-menu"]/li['+str(counter_menu)+']')))
             menu = driver.find_element_by_xpath('//*[@id="box-apps-menu"]/li['+str(counter_menu)+']')
             menu.click()
-            time.sleep(1)
+            #time.sleep(1)
             #conuntet_submenu can start from 2 because first submenu loaded by default
             counter_submenu = 1
             while True:
                 try:
                     submenu = driver.find_element_by_xpath('//*[@id="box-apps-menu"]/li['+str(counter_menu)+']/ul/li['+str(counter_submenu)+']')
                     submenu.click()
-                    time.sleep(1)
+                    #time.sleep(1)
                     counter_submenu = counter_submenu + 1
                 except:
                     break
