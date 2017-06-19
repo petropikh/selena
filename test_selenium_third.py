@@ -3,6 +3,7 @@ import time
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
+import pytest
 
 def test_my_first():
     #driver = webdriver.Safari()
@@ -12,8 +13,8 @@ def test_my_first():
     wait = WebDriverWait(driver, 5)
 
     driver.get('http://127.0.0.1/litecart/admin/')
-    login_filed = driver.find_element_by_name('username')
-    login_filed.send_keys('admin')
+    login_field = driver.find_element_by_name('username')
+    login_field.send_keys('admin')
     password_field = driver.find_element_by_name('password')
     password_field.send_keys('admin')
     login_button = driver.find_element_by_xpath('//*[@id="box-login"]/form/div[2]/button')
@@ -25,6 +26,7 @@ def test_my_first():
             el_menu = wait.until(ec.presence_of_element_located((By.XPATH, '//*[@id="box-apps-menu"]/li['+str(counter_menu)+']')))
             menu = driver.find_element_by_xpath('//*[@id="box-apps-menu"]/li['+str(counter_menu)+']')
             menu.click()
+            assert len(driver.find_elements_by_tag_name('h1')) == 0
             #time.sleep(1)
             #conuntet_submenu can start from 2 because first submenu loaded by default
             counter_submenu = 1
@@ -32,6 +34,7 @@ def test_my_first():
                 try:
                     submenu = driver.find_element_by_xpath('//*[@id="box-apps-menu"]/li['+str(counter_menu)+']/ul/li['+str(counter_submenu)+']')
                     submenu.click()
+                    assert len(driver.find_elements_by_tag_name('h1')) > 0
                     #time.sleep(1)
                     counter_submenu = counter_submenu + 1
                 except:
