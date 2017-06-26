@@ -1,19 +1,13 @@
 from selenium import webdriver
 import time
-from selenium.webdriver.support import expected_conditions as ec
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.common.by import By
-import pytest
 
 def test_five():
     #driver = webdriver.Safari()
     #driver = webdriver.Firefox('/Users/petro/Downloads/geckodriver')
     driver = webdriver.Chrome('/Users/petro/Downloads/chromedriver')
-
-    wait = WebDriverWait(driver, 5)
+    driver.implicitly_wait(5)
 
     driver.get('http://localhost/litecart')
-    time.sleep(2)
     main_name = driver.find_element_by_class_name('name').text
     main_price_regular = driver.find_element_by_class_name('regular-price').text
     main_price_regular_strike_color = driver.find_element_by_class_name('regular-price').value_of_css_property('text-decoration')
@@ -23,7 +17,6 @@ def test_five():
 
     item = driver.find_element_by_xpath('//*[@id="box-campaign-products"]/div/div/div/a')
     item.click()
-    time.sleep(2)
 
     item_name = driver.find_element_by_tag_name('h1').text
     item_price_regular = driver.find_element_by_class_name('regular-price').text
