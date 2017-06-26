@@ -9,8 +9,7 @@ def test_my_first():
     #driver = webdriver.Safari()
     #driver = webdriver.Firefox('/Users/petro/Downloads/geckodriver')
     driver = webdriver.Chrome('/Users/petro/Downloads/chromedriver')
-
-    wait = WebDriverWait(driver, 5)
+    driver.implicitly_wait(5)
 
     driver.get('http://127.0.0.1/litecart/admin/')
     login_field = driver.find_element_by_name('username')
@@ -20,28 +19,25 @@ def test_my_first():
     login_button = driver.find_element_by_xpath('//*[@id="box-login"]/form/div[2]/button')
     login_button.click()
 
-    counter_menu = 1
-    while True:
-        try:
-            el_menu = wait.until(ec.presence_of_element_located((By.XPATH, '//*[@id="box-apps-menu"]/li['+str(counter_menu)+']')))
-            menu = driver.find_element_by_xpath('//*[@id="box-apps-menu"]/li['+str(counter_menu)+']')
-            menu.click()
-            assert len(driver.find_elements_by_tag_name('h1')) == 0
-            #time.sleep(1)
-            #conuntet_submenu can start from 2 because first submenu loaded by default
-            counter_submenu = 1
-            while True:
-                try:
-                    submenu = driver.find_element_by_xpath('//*[@id="box-apps-menu"]/li['+str(counter_menu)+']/ul/li['+str(counter_submenu)+']')
-                    submenu.click()
-                    assert len(driver.find_elements_by_tag_name('h1')) > 0
-                    #time.sleep(1)
-                    counter_submenu = counter_submenu + 1
-                except:
-                    break
-            counter_menu = counter_menu + 1
-        except:
-            break
+    i = 0
+    len_menu = len(driver.find_elements_by_xpath(".//*[@id='box-apps-menu']/li"))
 
-    time.sleep(2)
+    while i < len_menu:
+        i += 1
+        xpath = ".//*[@id='box-apps-menu']/li[{}]".format(i)
+        driver.find_element_by_xpath(xpath).click()
+        assert len(driver.find_elements_by_tag_name('h1')) != 0
+
+        len_submenu = len(driver.find_elements_by_xpath(".//*[@id='box-apps-menu']/li[{}]/ul/li".format(i)))
+
+        x = 0
+        while x < len_submenu:
+            x += 1
+            print('DEBUG :' + str(len_submenu))
+            try:
+                driver.find_element_by_xpath('//*[@id="box-apps-menu"]/li[' + str(i) + ']/ul/li[' + str(x) + ']').click()
+                assert len(driver.find_elements_by_tag_name('h1')) != 0
+            except:
+                pass
+
     driver.quit()
