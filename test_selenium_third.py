@@ -1,9 +1,4 @@
 from selenium import webdriver
-import time
-from selenium.webdriver.support import expected_conditions as ec
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.common.by import By
-import pytest
 
 def test_my_first():
     #driver = webdriver.Safari()
