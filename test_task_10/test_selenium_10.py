@@ -1,6 +1,6 @@
 import time
 from selenium import webdriver
-from test_task_9 import test_add_item, test_delete_items, test_open_shopping_cart
+from test_task_10 import test_add_item, test_delete_items, test_open_shopping_cart
 
 def test_my_first():
 
