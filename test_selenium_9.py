@@ -1,14 +1,16 @@
 from selenium import webdriver
 from selenium.webdriver.support.events import EventFiringWebDriver, AbstractEventListener
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+import time
+import os
 
 def test_my_first():
 
     class ScreenshotListener(AbstractEventListener):
         def on_exception(self, exception, driver):
             print(driver.get_log("browser"))
-            screenshot_name = "exception.png"
-            driver.get_screenshot_as_file(screenshot_name)
+            screenshot_name = "exception_{}.png".format(time.strftime("%H_%M_%S"))
+            driver.get_screenshot_as_file(os.path.abspath(os.curdir) + screenshot_name)
             print("Screenshot saved as '%s'" % screenshot_name)
         def before_find(self, by, value, driver):
             print(driver.get_log("browser"))
@@ -20,11 +22,11 @@ def test_my_first():
             print(driver.get_log("browser"))
             print(by, value)
 
-    driver = EventFiringWebDriver(webdriver.Chrome(), ScreenshotListener())
+    driver = EventFiringWebDriver(webdriver.Chrome('/Users/petro/Downloads/chromedriver'), ScreenshotListener())
     driver.implicitly_wait(5)
 
     driver.get('http://127.0.0.1/litecart/admin/')
-    login_field = driver.find_element_by_name('username')
+    login_field = driver.find_element_by_name('usernamee')
     login_field.send_keys('admin')
     password_field = driver.find_element_by_name('password')
     password_field.send_keys('admin')
