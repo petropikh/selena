@@ -1,10 +1,11 @@
 from selenium import webdriver
 import time
 from selenium.webdriver.common.keys import Keys
+import os
 
 def test_my_first():
     #driver = webdriver.Safari()
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome('/Users/petro/Downloads/chromedriver')
     driver.implicitly_wait(5)
 
     driver.maximize_window()
@@ -69,7 +70,7 @@ def test_my_first():
     length.send_keys('25')
 
     image = driver.find_element_by_name('new_images[]')
-    image.send_keys('/home/ppikh/PycharmProjects/selena/car.jpg')
+    image.send_keys(os.path.abspath(os.curdir) + '/car.jpg')
 
     information = driver.find_element_by_xpath('//*[@id="main"]/form/div/ul/li[2]/a')
     information.click()
