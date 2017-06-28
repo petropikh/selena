@@ -18,12 +18,14 @@ def test_my_first():
     len_menu = len(driver.find_elements_by_xpath(".//*[@id='box-apps-menu']/li"))
 
     while i < len_menu:
+        driver.implicitly_wait(0)
         i += 1
         xpath = ".//*[@id='box-apps-menu']/li[{}]".format(i)
         driver.find_element_by_xpath(xpath).click()
         assert len(driver.find_elements_by_tag_name('h1')) != 0
 
         len_submenu = len(driver.find_elements_by_xpath(".//*[@id='box-apps-menu']/li[{}]/ul/li".format(i)))
+        driver.implicitly_wait(5)
 
         x = 0
         while x < len_submenu:
