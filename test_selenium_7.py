@@ -1,19 +1,13 @@
 from selenium import webdriver
 import time
-from selenium.webdriver.support import expected_conditions as ec
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.common.by import By
 
 def test_my_first():
-    #driver = webdriver.Safari()
-    driver = webdriver.Chrome()
+
+    driver = webdriver.Chrome('/Users/petro/Downloads/chromedriver')
     driver.implicitly_wait(5)
-    #wait = WebDriverWait(driver, 5)
     driver.maximize_window()
 
     driver.get('http://127.0.0.1/litecart/')
-
-    counter = 1
 
     choose_duck = driver.find_element_by_xpath('//*[@id="box-popular-products"]/div/div[1]/div/a/div[1]/img')
     choose_duck.click()
@@ -33,6 +27,7 @@ def test_my_first():
     time.sleep(2)
     close = driver.find_element_by_xpath('/html/body/div[2]/div/button')
     close.click()
+
     cart = driver.find_element_by_class_name('quantity')
     assert cart.text == '2'
     print('Text ' + str(cart.text))
@@ -52,12 +47,16 @@ def test_my_first():
     cart_menu = driver.find_element_by_class_name('quantity')
     cart_menu.click()
 
-    remove = driver.find_elements_by_class_name('btn-danger')
-    for i in remove:
-        time.sleep(3)
-        print(str(i))
-        i.click()
+    table_body_xpath = '//*[@id="box-checkout-cart"]/div/table/tbody'
+
+    table_body = driver.find_element_by_xpath(table_body_xpath)
+    elements_in_table = table_body.find_elements_by_class_name('item')
+
+    for i in elements_in_table:
+        time.sleep(2)
+        driver.find_element_by_name('remove_cart_item').click()
+        #print(i)
 
 
-    time.sleep(2)
+    time.sleep(5)
     driver.quit()
