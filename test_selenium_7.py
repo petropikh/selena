@@ -9,6 +9,9 @@ def test_my_first():
 
     driver.get('http://127.0.0.1/litecart/')
 
+    choose_popular = driver.find_element_by_xpath('//*[@id="content"]/ul/li[2]/a')
+    choose_popular.click()
+
     choose_duck = driver.find_element_by_xpath('//*[@id="box-popular-products"]/div/div[1]/div/a/div[1]/img')
     choose_duck.click()
     add_to_cart = driver.find_element_by_class_name('btn-success')
