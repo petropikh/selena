@@ -1,5 +1,4 @@
 from selenium import webdriver
-import time
 from selenium.webdriver.common.keys import Keys
 import os
 
@@ -117,5 +116,4 @@ def test_my_first():
     check = driver.find_element_by_link_text('some new item')
     check.click()
 
-    time.sleep(2)
     driver.quit()
