@@ -1,5 +1,4 @@
 from selenium import webdriver
-import time
 
 def test_my_first():
     driver = webdriver.Safari()
@@ -15,5 +14,4 @@ def test_my_first():
     login_button = driver.find_element_by_class_name('btn btn-default')
     login_button.click()
 
-    time.sleep(2)
     driver.quit()
