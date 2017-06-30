@@ -1,11 +1,14 @@
 from selenium import webdriver
-import time
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 def test_my_first():
 
-    driver = webdriver.Chrome('/Users/petro/Downloads/chromedriver')
+    driver = webdriver.Chrome()
     driver.implicitly_wait(5)
     driver.maximize_window()
+    wait = WebDriverWait(driver, 5)
 
     driver.get('http://127.0.0.1/litecart/')
 
@@ -16,36 +19,34 @@ def test_my_first():
     choose_duck.click()
     add_to_cart = driver.find_element_by_class_name('btn-success')
     add_to_cart.click()
-    time.sleep(2)
     close = driver.find_element_by_xpath('/html/body/div[2]/div/button')
     close.click()
+    w1 = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'quantity')))
     cart = driver.find_element_by_class_name('quantity')
     assert cart.text == '1'
-    print('Text ' + str(cart.text))
+    print('Text from case 1 ' + str(cart.text))
 
     choose_duck = driver.find_element_by_xpath('//*[@id="box-popular-products"]/div/div[2]/div/a/div[1]/img')
     choose_duck.click()
     add_to_cart = driver.find_element_by_class_name('btn-success')
     add_to_cart.click()
-    time.sleep(2)
     close = driver.find_element_by_xpath('/html/body/div[2]/div/button')
     close.click()
-
+    w2 = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'quantity')))
     cart = driver.find_element_by_class_name('quantity')
     assert cart.text == '2'
-    print('Text ' + str(cart.text))
+    print('Text from case 2 ' + str(cart.text))
 
     choose_duck = driver.find_element_by_xpath('//*[@id="box-popular-products"]/div/div[3]/div/a/div[1]/img')
     choose_duck.click()
     add_to_cart = driver.find_element_by_class_name('btn-success')
     add_to_cart.click()
-    time.sleep(2)
     close = driver.find_element_by_xpath('/html/body/div[2]/div/button')
     close.click()
-
+    w3 = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'quantity')))
     cart = driver.find_element_by_class_name('quantity')
     assert cart.text == '3'
-    print('Text ' + str(cart.text))
+    print('Text from case 3 ' + str(cart.text))
 
     cart_menu = driver.find_element_by_class_name('quantity')
     cart_menu.click()
@@ -56,10 +57,9 @@ def test_my_first():
     elements_in_table = table_body.find_elements_by_class_name('item')
 
     for i in elements_in_table:
-        time.sleep(2)
+        wait.until(EC.element_to_be_clickable((By.NAME, 'remove_cart_item')))
         driver.find_element_by_name('remove_cart_item').click()
-        #print(i)
+        print(i)
 
 
-    time.sleep(5)
     driver.quit()
