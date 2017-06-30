@@ -1,6 +1,4 @@
-
 from selenium import webdriver
-import time
 from selenium.webdriver.common.keys import Keys
 
 def test_my_first():
@@ -27,5 +25,8 @@ def test_my_first():
     for i in link:
         i.click()
 
-    time.sleep(2)
+    for x in driver.window_handles:
+        driver.switch_to.window(x)
+        driver.close()
+
     driver.quit()
