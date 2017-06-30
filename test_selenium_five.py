@@ -1,5 +1,4 @@
 from selenium import webdriver
-import time
 
 def test_five():
     #driver = webdriver.Safari()
@@ -34,5 +33,4 @@ def test_five():
 
     print('Color is ' + item_price_discount_bold)
 
-    time.sleep(2)
     driver.quit()
