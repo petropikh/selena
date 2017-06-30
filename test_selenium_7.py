@@ -1,3 +1,4 @@
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -5,8 +6,8 @@ from selenium.webdriver.support import expected_conditions as EC
 
 
 def test_my_first():
-    driver = webdriver.Chrome()
-    driver.implicitly_wait(5)
+    driver = webdriver.Firefox()
+    #driver.implicitly_wait(5)
     driver.maximize_window()
     wait = WebDriverWait(driver, 5)
 
