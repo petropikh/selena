@@ -12,7 +12,6 @@ def test_my_first():
     wait = WebDriverWait(driver, 5)
 
     driver.get('http://127.0.0.1/litecart/')
-
     choose_popular = driver.find_element_by_xpath('//*[@id="content"]/ul/li[2]/a')
     choose_popular.click()
 
@@ -37,7 +36,6 @@ def test_my_first():
     '//*[@id="box-popular-products"]/div/div[2]/div/a/div[1]/img',
     '//*[@id="box-popular-products"]/div/div[3]/div/a/div[1]/img']
 
-
     item_counter = 0
     for i in items_xpath:
         add_item_to_cart(str(i))
@@ -50,7 +48,6 @@ def test_my_first():
 
     table_body_xpath = '//*[@id="box-checkout-cart"]/div/table/tbody'
     wait.until(EC.element_to_be_clickable((By.XPATH, table_body_xpath)))
-
     table_body = driver.find_element_by_xpath(table_body_xpath)
     elements_in_table = table_body.find_elements_by_class_name('item')
 
